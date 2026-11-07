@@ -26,7 +26,9 @@ For a tool installed as a script, run the script itself:
 python -X importtime "$(command -v aws)" --version 2> import.log
 ```
 
-Each line gives a module's own time and its cumulative time, in microseconds. Here is the end of the sorted log for `aws --version`:
+That needs the tool to be a Python script, as `aws` v1 is when installed with pip. The official v2 installer ships a compiled bundle, which this command cannot run.
+
+Each line gives a module's own time and its cumulative time, in microseconds. Here is the end of the sorted log for `aws --version`, v1:
 
 ```text
 import time:      2262 |     161030 | awscli.handlers
@@ -56,7 +58,7 @@ A short call to a Python CLI spends its time on things that have nothing to do w
 1. **Starting the interpreter.** The smallest part: 45 ms here.
 2. **Importing.** Finding each file, reading it, running its top level. Hundreds of modules, each one a few file lookups and some executed code. This is usually the largest part.
 3. **Initializing.** Building the argument parser, loading plugins, reading config, parsing data files. `aws` builds its driver and lists the services it knows before it answers `--version`.
-4. **Shutting down.** Tearing the interpreter down has a cost too: about 40 ms per call for `aws` on my test server.
+4. **Shutting down.** Tearing the interpreter down has a cost too: about 40 ms per call for `aws` v1 on my test server.
 
 None of this depends on the work you asked for, so it weighs most on the shortest commands. It is also paid again on every call: run a linter on each file in a loop, or a tool in a Makefile or a git hook, and it adds up quickly.
 
@@ -107,13 +109,13 @@ Measured with no tool-specific setup, median of 20 interleaved runs, every outpu
 | `dbt --help` ¹ | 2721 ms | 30 ms | x90.5 |
 | `poetry --version` | 287 ms | 16 ms | x18.2 |
 | `ansible --version` | 199 ms | 15 ms | x13.4 |
+| `aws --version` (v2) | 386 ms | 40 ms | x9.7 |
 | `black --check sample.py` | 92 ms | 12 ms | x7.5 |
 | `pip list` | 127 ms | 19 ms | x6.7 |
-| `aws --version` | 221 ms | 41 ms | x5.3 |
 | `dbt ls` ¹ | 3858 ms | 1166 ms | x3.3 |
 | `pytest -q` | 184 ms | 66 ms | x2.8 |
 
-¹ On a laptop, in a Docker container. The others on a 2-vCPU VPS.
+¹ On a laptop, in a Docker container. The others on a 2-vCPU VPS. On macOS, `aws` v2 runs natively for now.
 
 ## What this does not fix
 
