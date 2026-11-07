@@ -11,6 +11,10 @@ On my laptop, `dbt --help` takes 2.7 seconds. It connects to nothing and reads n
 
 So the interpreter is not the problem. Here is where the rest goes, how to find it in your own tools, and what you can do about it, whether you maintain the tool or only use it.
 
+![The same bash script, run natively and with speedrunner: 24.0 s and 5.3 s](assets/speedrunner.gif)
+
+*The same bash script, natively and with [speedrunner](https://github.com/anthonyGosme/speedrunner), the tool I built for this: 24.0 s → 5.3 s, same output, daemons already running.*
+
 ## Measure it in one command
 
 Python has had the answer built in since 3.7:
