@@ -1,6 +1,6 @@
 ---
 title: "Why your Python CLI takes 3 seconds to do nothing"
-description: "dbt --help takes 2.7 s. Where that time goes, how to measure it in one command, what a tool's author can fix, and what you can do as its user."
+description: "dbt's help text takes 2.7 s to print. Where that time goes, how to measure it in one command, what a tool's author can fix, and what you can do as its user."
 ---
 
 # Why your Python CLI takes 3 seconds to do nothing
