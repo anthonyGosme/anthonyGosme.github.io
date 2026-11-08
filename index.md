@@ -96,7 +96,7 @@ You cannot rewrite `aws` or `dbt`. That is the case I care about, since most of 
 
 The time goes to work done the same way on every call. So do it once, and keep the result: a daemon holds the tool with everything already imported, and forks a copy for each call. The copy starts with all of it in memory. It is not a new idea: JumpTheGun, quicken and python-preloaded do it for Python, and AWS Lambda SnapStart does a similar thing with snapshots.
 
-The hard part is not the speed. It is getting exactly what the real tool would have given you: same output, same exit code, same environment, same terminal. A forked process inherits things from its daemon that a fresh one would not have. That is most of the work, and I will write about it separately.
+The hard part is not the speed. It is getting exactly what the real tool would have given you: same output, same exit code, same environment, same terminal. A forked process inherits things from its daemon that a fresh one would not have. That is most of the work, and I wrote about it separately: [Forking a CLI is easy. Making it behave like the CLI is the hard part](/fork-fidelity/).
 
 I built one of these, [speedrunner](https://github.com/anthonyGosme/speedrunner). Nothing to configure, and Python, Ruby, PHP and Node are covered:
 
