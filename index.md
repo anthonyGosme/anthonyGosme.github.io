@@ -132,3 +132,5 @@ This is about the commands you run all day, the short ones where you wait for th
 ## Try it on your slowest tool
 
 Run the two lines from the top on the CLI that annoys you most. If you find something surprising in the log, I would like to see it, and if you maintain the tool, that log is probably your easiest performance win this year.
+
+**Next:** [Forking a CLI is easy. Making it behave like the CLI is the hard part](/fork-fidelity/), on what it takes for a forked call to behave exactly like the real tool.
